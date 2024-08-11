@@ -1,0 +1,11 @@
+server:
+  port: 9292
+
+spring:
+  application:
+    name: school-api-gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
