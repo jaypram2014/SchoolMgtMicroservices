@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: class-service
+  codec:
+    max-in-memory-size:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/schoolmgt
+    username: postgres
+    password: admin
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect  
+      
+server:
+  port: 9091
