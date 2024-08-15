@@ -33,13 +33,11 @@
 	<dependencies>
 		<!-- BOM -->
 		<dependency>
-			<!--
-			https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>2021.0.3</version>
-				<type>pom</type>
-				<scope>import</scope>			
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>Finchley.SR4</version>
+			<type>pom</type>
+			<scope>import</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
