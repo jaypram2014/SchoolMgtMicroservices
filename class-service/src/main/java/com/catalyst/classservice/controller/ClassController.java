@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.catalyst.classservice.model.ClassMaster;
+import com.catalyst.classservice.entity.ClassMaster;
 import com.catalyst.classservice.service.ClassService;
 import com.catalyst.school.mgmt.pojo.ClassDTO;
 

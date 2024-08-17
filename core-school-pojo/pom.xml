@@ -5,6 +5,6 @@
   	<groupId>com.catalyst.school-mgmt</groupId>
   	<artifactId>schoolmgt</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
-  	<relativePath>../../GITHUB_SANDBOX/SCHOOL/SchoolMgtMicroservices/schoolmgt</relativePath>
+  	<relativePath>../schoolmgt</relativePath>
   </parent>
 </project>

@@ -1,3 +1,4 @@
 com\catalyst\school\mgmt\pojo\ClassDTO.class
 com\catalyst\school\mgmt\pojo\StudentDTO.class
 com\catalyst\school\mgmt\pojo\SubjectDTO.class
+com\catalyst\school\mgmt\pojo\SubjectEnum.class

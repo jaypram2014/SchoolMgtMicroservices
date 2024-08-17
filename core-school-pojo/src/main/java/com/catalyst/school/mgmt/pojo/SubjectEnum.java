@@ -1,4 +1,4 @@
-package com.catalyst.classservice.model;
+package com.catalyst.school.mgmt.pojo;
 
 public enum SubjectEnum {
 	   MATHEMATICS,

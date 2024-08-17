@@ -1,4 +1,4 @@
-package com.catalyst.classservice.model;
+package com.catalyst.classservice.entity;
 
 import java.util.ArrayList;
 import java.util.List;
