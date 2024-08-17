@@ -16,6 +16,11 @@
   	<module>../school-api-gateway</module>
   	<module>../student-service</module>
   	<module>../subject-service</module>
+  	
+  	
+  	<module>
+  		../../../../SchoolMgmtMicroService2/core-school-pojo
+  	</module>
   </modules>
   
 </project>

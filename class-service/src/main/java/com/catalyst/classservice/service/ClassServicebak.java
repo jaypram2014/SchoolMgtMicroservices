@@ -1,0 +1,249 @@
+package com.catalyst.classservice.service;
+
+//@Service
+public class ClassServicebak {
+
+	/*
+	 * @Autowired private ClassRepo classRepo;
+	 * 
+	 * // @Autowired // private StudentRepo studentRepo; // // @Autowired // private
+	 * SubjectRepo subjectRepo;
+	 * 
+	 * // find By ID public ClassMaster getClassById(Long id) {
+	 * 
+	 * return classRepo.findById(id).filter(Objects::nonNull).get(); }
+	 * 
+	 * // find ALL public List<ClassMaster> getAllClasses() {
+	 * 
+	 * return classRepo.findAll(); }
+	 * 
+	 * public ClassMaster saveClassData(ClassMaster classData) {
+	 * 
+	 * ClassMaster classMaster = null; try { // classMaster =
+	 * classRepo.save(classData); // OLD Method classMaster =
+	 * createOrUpdateClass(classData, null);
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * e.printStackTrace(); }
+	 * 
+	 * return classMaster;
+	 * 
+	 * }
+	 * 
+	 * public ClassMaster updateClassData(ClassMaster classData, Long id) {
+	 * ClassMaster cls = null;
+	 * 
+	 * // Optional<ClassMaster> existingClass = classRepo.findById(id); // //
+	 * if(existingClass.isPresent()) { // cls = existingClass.get(); //
+	 * cls.setClassName(classData.getClassName()); //
+	 * cls.setStudents(classData.getStudents()); // // return classRepo.save(cls);
+	 * // // }else { // throw new
+	 * ResourceNotFoundException("Class not found with supplied ID :"+id); // }
+	 * 
+	 * ClassMaster classMaster = createOrUpdateClass(classData, id);
+	 * 
+	 * return classMaster; }
+	 * 
+	 * 
+	 * public ClassMaster createOrUpdateClass(ClassMaster classRequest, Long id) {
+	 * 
+	 * ClassMaster classMaster = new ClassMaster();
+	 * 
+	 * 
+	 * //if(StringUtils.hasText(classRequest.getId().toString())) { if(id!=null) {
+	 * classMaster= updateClassWorkflow(id, classMaster); } else {
+	 * classMaster=createClassWorkFlow(classRequest); }
+	 * 
+	 * 
+	 * //return classMaster; return classMaster;
+	 * 
+	 * }
+	 * 
+	 * /// CREATE CLASS - STUDENTS - SUBJECTS: private ClassMaster
+	 * createClassWorkFlow(ClassDTO classRequest) {
+	 * System.out.println("CREATE CLASS WORKFLOW ----"); ClassMaster
+	 * classMaster=null; try { classMaster = new ClassMaster();
+	 * classMaster.setClassName(classRequest.getClassName());
+	 * 
+	 * List<StudentDTO> studentResqstList = classRequest.getStudents();
+	 * List<StudentDTO> newStudentList = new ArrayList<StudentDTO>();
+	 * 
+	 * // set Students for (StudentDTO studentMaster : studentResqstList) {
+	 * StudentDTO newstudentMaster = new StudentDTO();
+	 * newstudentMaster.setFirstName(studentMaster.getFirstName());
+	 * newstudentMaster.setLastName(studentMaster.getLastName());
+	 * newstudentMaster.setGuardianName(studentMaster.getGuardianName());
+	 * newstudentMaster.setBloodGroup(studentMaster.getBloodGroup());
+	 * newstudentMaster.setClassId(classMaster.getId());
+	 * 
+	 * // Set Subjects List<SubjectDTO> subjects = studentMaster.getSubjects();
+	 * List<SubjectDTO> acceptedSubjects = new ArrayList<>(); for (SubjectDTO
+	 * subjectDTO : subjects) {
+	 * if(SubjectEnum.valueOf(subjectDTO.getSubjectName())!=null) {
+	 * acceptedSubjects.add(subjectDTO); } }
+	 * 
+	 * newstudentMaster.setSubjects(acceptedSubjects);
+	 * newStudentList.add(newstudentMaster); }
+	 * 
+	 * classMaster.setStudents(newStudentList);
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * 
+	 * return classRepo.save(classMaster);
+	 * 
+	 * }
+	 * 
+	 * /// UPDATE CLASS - STUDENT - SUBJECT OPERATION :
+	 * 
+	 * private ClassMaster updateClassWorkflow(Long classId, ClassMaster
+	 * classRequest) { System.out.println("CREATE CLASS WORKFLOW ----");
+	 * Optional<ClassMaster> existingClass = classRepo.findById(classId);
+	 * List<StudentDTO> existingStudents = new ArrayList<>();
+	 * 
+	 * 
+	 * if (existingClass.isPresent()) {
+	 * 
+	 * existingClass.get().setId(classRequest.getId());
+	 * existingClass.get().setClassName(classRequest.getClassName());
+	 * 
+	 * List<StudentDTO> studentResqstList = classRequest.getStudents();
+	 * 
+	 * for (StudentDTO studentMaster : studentResqstList) {
+	 * 
+	 * existingStudents.addAll(populateStudentWorkflow(studentMaster.getId(),
+	 * studentMaster));
+	 * 
+	 * }
+	 * 
+	 * existingClass.get().setStudents(existingStudents); // set the list return
+	 * classRepo.save(existingClass.get());
+	 * 
+	 * }
+	 * 
+	 * else { throw new ResourceNotFoundException("Class not found for Class Id :: "
+	 * + classId);
+	 * 
+	 * } }
+	 * 
+	 * 
+	 * private List<StudentDTO> populateStudentWorkflow(Long studentId, StudentDTO
+	 * studentRequest) {
+	 * 
+	 * // Optional<StudentMaster> existingStudent = studentRepo.findById(studentId);
+	 * Optional<StudentDTO> existingStudent = Optional.empty();
+	 * 
+	 * List<StudentDTO> tempStudentList = new ArrayList<>(); List<SubjectDTO>
+	 * existingSubjects = new ArrayList<SubjectDTO>();
+	 * 
+	 * if (existingStudent.isPresent()) {
+	 * 
+	 * existingStudent.get().setFirstName(studentRequest.getFirstName());
+	 * existingStudent.get().setLastName(studentRequest.getLastName());
+	 * existingStudent.get().setBloodGroup(studentRequest.getBloodGroup());
+	 * existingStudent.get().setGuardianName(studentRequest.getGuardianName());
+	 * 
+	 * List<SubjectDTO> subjectList = studentRequest.getSubjects();
+	 * 
+	 * for (SubjectDTO subjectDTO : subjectList) {
+	 * 
+	 * existingSubjects.addAll(populateSubjectWorkflow(subjectDTO.getSubjId(),
+	 * subjectDTO));
+	 * 
+	 * }
+	 * 
+	 * existingStudent.get().setSubjects(existingSubjects); // set the list
+	 * tempStudentList.add(existingStudent.get());
+	 * 
+	 * return tempStudentList;
+	 * 
+	 * }
+	 * 
+	 * else throw new
+	 * ResourceNotFoundException("Student not found for StudentId Id :: " +
+	 * studentId); }
+	 * 
+	 * 
+	 * private List<SubjectDTO> populateSubjectWorkflow(Long id, SubjectDTO
+	 * subjectRequest){
+	 * 
+	 * // Optional<SubjectMaster> existingSubject = subjectRepo.findById(id);
+	 * Optional<SubjectDTO> existingSubject = Optional.empty();
+	 * 
+	 * List<SubjectDTO> tempSubjectList = new ArrayList<>();
+	 * 
+	 * if (existingSubject.isPresent()) {
+	 * 
+	 * existingSubject.get().setSubjectName(subjectRequest.getSubjectName());
+	 * 
+	 * tempSubjectList.add(existingSubject.get()); return tempSubjectList; }else
+	 * throw new ResourceNotFoundException("Subject not found");
+	 * 
+	 * 
+	 * }
+	 * 
+	 * private ClassMaster createClassWorkFlow() { return null; // TODO
+	 * Auto-generated method stub
+	 * 
+	 * }
+	 * 
+	 * // Added By Chayan
+	 * 
+	 * public void createOrUpdateClass(ClassMaster classRequest) { ClassMaster
+	 * classEntity = classRepo.findByClassName(classRequest.getClassName()); if
+	 * (classEntity == null) { classEntity = new ClassMaster();
+	 * classEntity.setClassName(classRequest.getClassName()); }
+	 * 
+	 * for (StudentMaster studentRequest : classRequest.getStudents()) {
+	 * //Optional<StudentMaster> student =
+	 * studentRepo.findByFirstNameAndLastName(studentRequest.getFirstName(),
+	 * studentRequest.getLastName()); //
+	 * 
+	 * if (StringUtils.isEmpty(studentRequest.getId())) { // New Student
+	 * 
+	 * StudentMaster smaster = new StudentMaster(); List<StudentMaster> listStud =
+	 * classRequest.getStudents(); // List<StudentMaster> listTempStud = new
+	 * ArrayList<StudentMaster>();
+	 * 
+	 * for (StudentMaster studentMaster : listStud) {
+	 * smaster.setFirstName(studentMaster.getFirstName());
+	 * smaster.setLastName(studentMaster.getLastName());
+	 * smaster.setGuardianName(studentMaster.getGuardianName());
+	 * smaster.setBloodGroup(studentMaster.getBloodGroup());
+	 * 
+	 * listTempStud.add(smaster);
+	 * 
+	 * } classEntity.setStudents(listTempStud);
+	 * 
+	 * }else { //update Student Optional<StudentMaster> existingStudent =
+	 * studentRepo.findById(studentRequest.getId());
+	 * 
+	 * List<StudentMaster> listStud = classRequest.getStudents(); //
+	 * List<StudentMaster> listTempStud = new ArrayList<StudentMaster>();
+	 * 
+	 * for (StudentMaster studentMaster : listStud) {
+	 * existingStudent.get().setFirstName(studentMaster.getFirstName());
+	 * existingStudent.get().setLastName(studentMaster.getLastName());
+	 * existingStudent.get().setGuardianName(studentMaster.getGuardianName());
+	 * existingStudent.get().setBloodGroup(studentMaster.getBloodGroup());
+	 * 
+	 * listTempStud.add(existingStudent.get());
+	 * 
+	 * } classEntity.setStudents(listTempStud);
+	 * 
+	 * }
+	 * 
+	 * for (SubjectMaster subjectRequest : studentRequest.getSubjects()) { //
+	 * Subject subject = subjectRepository.findById(subjectRequest.getSubjectId());
+	 * // if (subject == null) { // subject = new Subject(); //
+	 * subject.setId(subjectRequest.getSubjectId()); //
+	 * subject.setName(subjectRequest.getSubjectName()); //
+	 * subjectRepository.save(subject); } // student.getSubjects().add(subject); }
+	 * 
+	 * //classEntity.getStudents().add(student); }
+	 * 
+	 * classRepository.save(classEntity); }
+	 */
+
+}

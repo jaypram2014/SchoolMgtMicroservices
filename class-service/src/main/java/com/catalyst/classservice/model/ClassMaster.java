@@ -39,9 +39,11 @@ public class ClassMaster {
 	@Column(name = "class_name")
     private String className;
 	
-	@OneToMany(mappedBy = "classMaster", fetch = FetchType.LAZY, cascade = CascadeType.ALL)	 // mappedBy = "classMaster"
-	List<StudentMaster> students = new ArrayList<StudentMaster>();
-
+	/*
+	 * @OneToMany(mappedBy = "classMaster", fetch = FetchType.LAZY, cascade =
+	 * CascadeType.ALL) // mappedBy = "classMaster" List<StudentMaster> students =
+	 * new ArrayList<StudentMaster>();
+	 */
 	
 	public Long getId() {
 		return id;
@@ -59,14 +61,13 @@ public class ClassMaster {
 		this.className = className;
 	}
 
-	@JsonManagedReference
-	public List<StudentMaster> getStudents() {
-		return students;
-	}
-
-	public void setStudents(List<StudentMaster> students) {
-		this.students = students;
-	}	
+	/*
+	 * @JsonManagedReference public List<StudentMaster> getStudents() { return
+	 * students; }
+	 * 
+	 * public void setStudents(List<StudentMaster> students) { this.students =
+	 * students; }
+	 */
 	
 	
 }
