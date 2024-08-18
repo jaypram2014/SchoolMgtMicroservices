@@ -7,14 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.classservice.entity.ClassMaster;
 import com.catalyst.classservice.exception.ResourceNotFoundException;
+import com.catalyst.classservice.feign.client.StudentServiceClientIntf;
 import com.catalyst.classservice.repository.ClassRepo;
 import com.catalyst.school.mgmt.pojo.ClassDTO;
+import com.catalyst.school.mgmt.pojo.StudentDTO;
 
 @Service
 public class ClassService {
 
   @Autowired
   private ClassRepo classRepo;
+
+  @Autowired
+  private StudentServiceClientIntf studentServiceClient;
 
   public ClassDTO saveClassData(ClassDTO classDTO) {
 
@@ -39,4 +44,10 @@ public class ClassService {
 
     return classRepo.findAll();
   }
+
+  public StudentDTO createStudentData(StudentDTO studentDTO) {
+
+    return studentServiceClient.saveStudentData(studentDTO);
+  }
+
 }
