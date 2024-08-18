@@ -15,7 +15,7 @@ public class SubjectDTO implements Serializable {
 
 	private String subjectName;
 
-	List<StudentDTO> students = new ArrayList<StudentDTO>();
+	private List<StudentDTO> students = new ArrayList<>();
 
 	public Long getSubjId() {
 		return subjId;
