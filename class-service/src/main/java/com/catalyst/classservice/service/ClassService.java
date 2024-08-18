@@ -1,9 +1,8 @@
 package com.catalyst.classservice.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.catalyst.classservice.entity.ClassMaster;
@@ -36,14 +35,11 @@ public class ClassService {
 
   }
 
-  private List<StudentDTO> getCreatedStudents(List<StudentDTO> list) {
-    List<StudentDTO> sudList = new ArrayList<>();
-    list.forEach(t->{
-      StudentDTO studentData = createStudentData(t);
-      sudList.add(studentData);
-    });
-   
-    return sudList;
+  private List<StudentDTO> getCreatedStudents(List<StudentDTO> studentList) {
+    return studentList.
+        stream()
+        .map(this::createStudentData)
+        .collect(Collectors.toList());
   }
 
   public ClassMaster getClassById(Long id) {
