@@ -1,5 +1,6 @@
 package com.catalyst.classservice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +31,19 @@ public class ClassService {
 
     ClassDTO newClassDTO = new ClassDTO();
     newClassDTO.setClassName(savedClass.get().getClassName());
+    newClassDTO.setStudents(getCreatedStudents(classDTO.getStudents()));
     return newClassDTO;
 
+  }
+
+  private List<StudentDTO> getCreatedStudents(List<StudentDTO> list) {
+    List<StudentDTO> sudList = new ArrayList<>();
+    list.forEach(t->{
+      StudentDTO studentData = createStudentData(t);
+      sudList.add(studentData);
+    });
+   
+    return sudList;
   }
 
   public ClassMaster getClassById(Long id) {
