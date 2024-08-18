@@ -15,16 +15,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-//import jakarta.persistence.CascadeType;
-//import jakarta.persistence.Column;
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.FetchType;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.OneToMany;
-//import jakarta.persistence.Table;
-
 @Entity
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "class_master", schema = "sms_class")
@@ -39,8 +29,8 @@ public class ClassMaster {
 	@Column(name = "class_name")
     private String className;
 	
-	@OneToMany(mappedBy = "classMaster", fetch = FetchType.LAZY, cascade = CascadeType.ALL)	 // mappedBy = "classMaster"
-	List<StudentMaster> students = new ArrayList<StudentMaster>();
+	//@OneToMany(mappedBy = "classMaster", fetch = FetchType.LAZY, cascade = CascadeType.ALL)	 // mappedBy = "classMaster"
+	//List<StudentMaster> students = new ArrayList<StudentMaster>();
 
 	
 	public Long getId() {
@@ -59,14 +49,14 @@ public class ClassMaster {
 		this.className = className;
 	}
 
-	@JsonManagedReference
-	public List<StudentMaster> getStudents() {
-		return students;
-	}
-
-	public void setStudents(List<StudentMaster> students) {
-		this.students = students;
-	}	
-	
+	//@JsonManagedReference
+//	public List<StudentMaster> getStudents() {
+//		return students;
+//	}
+//
+//	public void setStudents(List<StudentMaster> students) {
+//		this.students = students;
+//	}	
+//	
 	
 }

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.catalyst.classservice.exception.ResourceNotFoundException;
 import com.catalyst.classservice.model.ClassMaster;
 import com.catalyst.classservice.model.StudentMaster;
-import com.catalyst.classservice.model.SubjectEnum;
-import com.catalyst.classservice.model.SubjectMaster;
 import com.catalyst.classservice.repository.ClassRepo;
 
 
@@ -105,32 +103,33 @@ public class ClassService {
 			classMaster = new ClassMaster();
 			classMaster.setClassName(classRequest.getClassName());
 			
-			List<StudentMaster> studentResqstList = classRequest.getStudents();
-			List<StudentMaster> newStudentList = new ArrayList<StudentMaster>();
+//			List<StudentMaster> studentResqstList = classRequest.getStudents();
+//			List<StudentMaster> newStudentList = new ArrayList<StudentMaster>();
 			
 			// set Students
-			for (StudentMaster studentMaster : studentResqstList) {
-				StudentMaster newstudentMaster = new StudentMaster();
-				newstudentMaster.setFirstName(studentMaster.getFirstName());
-				newstudentMaster.setLastName(studentMaster.getLastName());
-				newstudentMaster.setGuardianName(studentMaster.getGuardianName());
-				newstudentMaster.setBloodGroup(studentMaster.getBloodGroup());
-				newstudentMaster.setClassMaster(classMaster);
+//			for (StudentMaster studentMaster : studentResqstList) {
+//				StudentMaster newstudentMaster = new StudentMaster();
+//				newstudentMaster.setFirstName(studentMaster.getFirstName());
+//				newstudentMaster.setLastName(studentMaster.getLastName());
+//				newstudentMaster.setGuardianName(studentMaster.getGuardianName());
+//				newstudentMaster.setBloodGroup(studentMaster.getBloodGroup());
+				//newstudentMaster.setClassMaster(classMaster);
 				
-				 // Set Subjects
-				 List<SubjectMaster> subjects = studentMaster.getSubjects();
-				 List<SubjectMaster> acceptedSubjects = new ArrayList<SubjectMaster>(); 
-				 for (SubjectMaster subjectMaster : subjects) {
-					 if(SubjectEnum.valueOf(subjectMaster.getSubjectName())!=null) {
-						 acceptedSubjects.add(subjectMaster);
-					 }
-				 }
+//				 // Set Subjects
+//				 List<SubjectMaster> subjects = studentMaster.getSubjects();
+//				 List<SubjectMaster> acceptedSubjects = new ArrayList<SubjectMaster>(); 
+//				 for (SubjectMaster subjectMaster : subjects) {
+//					 if(SubjectEnum.valueOf(subjectMaster.getSubjectName())!=null) {
+//						 acceptedSubjects.add(subjectMaster);
+//					 }
+//				 }
 				 
-				 newstudentMaster.setSubjects(acceptedSubjects);
-				 newStudentList.add(newstudentMaster);
-			}
+//				 newstudentMaster.setSubjects(acceptedSubjects);
+				
+//				 newStudentList.add(newstudentMaster);
+//			}
 			
-			classMaster.setStudents(newStudentList);
+//			classMaster.setStudents(newStudentList);
 			
 		} catch (Exception e) {			
 			e.printStackTrace();
@@ -153,15 +152,14 @@ public class ClassService {
 			existingClass.get().setId(classRequest.getId());
 			existingClass.get().setClassName(classRequest.getClassName());
 			
-			List<StudentMaster> studentResqstList = classRequest.getStudents();
+//			List<StudentMaster> studentResqstList = classRequest.getStudents();			
+//			for (StudentMaster studentMaster : studentResqstList) {
+//				
+//				existingStudents.addAll(populateStudentWorkflow(studentMaster.getId(), studentMaster));
+//				
+//			}
 			
-			for (StudentMaster studentMaster : studentResqstList) {
-				
-				existingStudents.addAll(populateStudentWorkflow(studentMaster.getId(), studentMaster));
-				
-			}
-			
-			existingClass.get().setStudents(existingStudents);   // set the list
+//			existingClass.get().setStudents(existingStudents);   // set the list
 			return classRepo.save(existingClass.get());
 
 		}
@@ -172,59 +170,59 @@ public class ClassService {
 		}
 	}
 	
-	private List<StudentMaster> populateStudentWorkflow(Long studentId, StudentMaster studentRequest) {
-
-//		Optional<StudentMaster> existingStudent = studentRepo.findById(studentId);
-		Optional<StudentMaster> existingStudent = Optional.empty();
+//	private List<StudentMaster> populateStudentWorkflow(Long studentId, StudentMaster studentRequest) {
+//
+////		Optional<StudentMaster> existingStudent = studentRepo.findById(studentId);
+//		Optional<StudentMaster> existingStudent = Optional.empty();
+//	
+//		List<StudentMaster> tempStudentList = new ArrayList<>();
+//		List<SubjectMaster> existingSubjects = new ArrayList<SubjectMaster>();
+//		
+//		if (existingStudent.isPresent()) {
+//
+//			existingStudent.get().setFirstName(studentRequest.getFirstName());
+//			existingStudent.get().setLastName(studentRequest.getLastName());
+//			existingStudent.get().setBloodGroup(studentRequest.getBloodGroup());
+//			existingStudent.get().setGuardianName(studentRequest.getGuardianName());
+//			
+//			List<SubjectMaster> subjectList = studentRequest.getSubjects();
+//						
+//			for (SubjectMaster subjectMaster : subjectList) {
+//								
+//				existingSubjects.addAll(populateSubjectWorkflow(subjectMaster.getSubjId(), subjectMaster));
+//				
+//			}
+//			
+//			existingStudent.get().setSubjects(existingSubjects);   // set the list
+//			tempStudentList.add(existingStudent.get());
+//			
+//			return tempStudentList;
+//
+//		}
+//
+//		else
+//			throw new ResourceNotFoundException("Student not found for StudentId Id :: " + studentId);
+//	}
 	
-		List<StudentMaster> tempStudentList = new ArrayList<>();
-		List<SubjectMaster> existingSubjects = new ArrayList<SubjectMaster>();
-		
-		if (existingStudent.isPresent()) {
-
-			existingStudent.get().setFirstName(studentRequest.getFirstName());
-			existingStudent.get().setLastName(studentRequest.getLastName());
-			existingStudent.get().setBloodGroup(studentRequest.getBloodGroup());
-			existingStudent.get().setGuardianName(studentRequest.getGuardianName());
-			
-			List<SubjectMaster> subjectList = studentRequest.getSubjects();
-						
-			for (SubjectMaster subjectMaster : subjectList) {
-								
-				existingSubjects.addAll(populateSubjectWorkflow(subjectMaster.getSubjId(), subjectMaster));
-				
-			}
-			
-			existingStudent.get().setSubjects(existingSubjects);   // set the list
-			tempStudentList.add(existingStudent.get());
-			
-			return tempStudentList;
-
-		}
-
-		else
-			throw new ResourceNotFoundException("Student not found for StudentId Id :: " + studentId);
-	}
 	
-	
-	private List<SubjectMaster> populateSubjectWorkflow(Long id, SubjectMaster subjectRequest){
-		
-//		Optional<SubjectMaster> existingSubject = subjectRepo.findById(id);
-		Optional<SubjectMaster> existingSubject = Optional.empty();
-		
-		List<SubjectMaster> tempSubjectList = new ArrayList<>();
-		
-		if (existingSubject.isPresent()) {
-
-			existingSubject.get().setSubjectName(subjectRequest.getSubjectName());
-			
-			tempSubjectList.add(existingSubject.get());
-			return tempSubjectList;
-		}else
-			 throw new ResourceNotFoundException("Subject not found");
-		
-		
-	}
+//	private List<SubjectMaster> populateSubjectWorkflow(Long id, SubjectMaster subjectRequest){
+//		
+////		Optional<SubjectMaster> existingSubject = subjectRepo.findById(id);
+//		Optional<SubjectMaster> existingSubject = Optional.empty();
+//		
+//		List<SubjectMaster> tempSubjectList = new ArrayList<>();
+//		
+//		if (existingSubject.isPresent()) {
+//
+//			existingSubject.get().setSubjectName(subjectRequest.getSubjectName());
+//			
+//			tempSubjectList.add(existingSubject.get());
+//			return tempSubjectList;
+//		}else
+//			 throw new ResourceNotFoundException("Subject not found");
+//		
+//		
+//	}
 
 	private ClassMaster createClassWorkFlow() {
 		return null;

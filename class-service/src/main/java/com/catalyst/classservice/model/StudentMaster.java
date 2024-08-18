@@ -57,36 +57,32 @@ public class StudentMaster implements Serializable {
 //	
 //	@Column(name = "remarks")
 //    private String remarks;
-
-//	@ManyToMany
-//	@JoinTable(name = "student_teacher",joinColumns = @JoinColumn(name="student_id"))
-//	private List<TeacherMaster> teachers = new ArrayList<TeacherMaster>();
 	
-	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn(name = "class_id")
-	private ClassMaster classMaster;
+//	@ManyToOne (fetch = FetchType.LAZY)
+//	@JoinColumn(name = "class_id")
+//	private ClassMaster classMaster;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable (
-			name = "student_subject",
-			schema = "sms",
-			joinColumns = {@JoinColumn(name="student_id")},
-			inverseJoinColumns = {@JoinColumn(name="subject_id")}
-			)				
-	private List<SubjectMaster> subjects = new ArrayList<SubjectMaster>(); 
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinTable (
+//			name = "student_subject",
+//			schema = "sms",
+//			joinColumns = {@JoinColumn(name="student_id")},
+//			inverseJoinColumns = {@JoinColumn(name="subject_id")}
+//			)				
+//	private List<SubjectMaster> subjects = new ArrayList<SubjectMaster>(); 
 	
 	
     /////================= GETTER / SETTER ================ ////
 
 	//@JsonManagedReference
-	public List<SubjectMaster> getSubjects() {
-		return subjects;
-	}
-
-	
-	public void setSubjects(List<SubjectMaster> subjects) {
-		this.subjects = subjects;
-	}
+//	public List<SubjectMaster> getSubjects() {
+//		return subjects;
+//	}
+//
+//	
+//	public void setSubjects(List<SubjectMaster> subjects) {
+//		this.subjects = subjects;
+//	}
 
 	public Long getId() {
 		return id;
@@ -169,15 +165,16 @@ public class StudentMaster implements Serializable {
 //	public void setRemarks(String remarks) {
 //		this.remarks = remarks;
 //	}
+	
 
-	@JsonBackReference
-	public ClassMaster getClassMaster() {
-		return classMaster;
-	}
-
-	public void setClassMaster(ClassMaster classMaster) {
-		this.classMaster = classMaster;
-	}
+//	@JsonBackReference
+//	public ClassMaster getClassMaster() {
+//		return classMaster;
+//	}
+//
+//	public void setClassMaster(ClassMaster classMaster) {
+//		this.classMaster = classMaster;
+//	}
 
 //	public List<TeacherMaster> getTeachers() {
 //		return teachers;
