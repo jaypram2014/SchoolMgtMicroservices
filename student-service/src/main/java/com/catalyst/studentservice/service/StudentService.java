@@ -31,6 +31,7 @@ public class StudentService {
 
 		StudentMaster stud = new StudentMaster();
 		stud.setFirstName(studentData.getFirstName());
+		stud.setBloodGroup(studentData.getBloodGroup());
 		StudentDTO newStudentDTO = new StudentDTO();
 		try {
 		  StudentMaster newStudent=studRepo.save(stud);
